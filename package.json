@@ -6,7 +6,10 @@
   "author": "Vinícius Santiago <55957552+viniciussantb@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2"
+    "@types/nodemailer": "^6.4.7",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.1",
+    "uuidv4": "^6.2.13"
   },
   "scripts": {
     "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts"

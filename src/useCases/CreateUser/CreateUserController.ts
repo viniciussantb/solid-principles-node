@@ -8,8 +8,6 @@ export class CreateUserController {
 
     async handleCreateUser(request: Request, response: Response): Promise<Response> {
         const { name, email, password } = request.body;
-        console.log(request.body);
-
 
         try {
             await this.createUserUseCase.execute({

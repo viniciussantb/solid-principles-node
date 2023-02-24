@@ -1,5 +1,6 @@
 import { User } from "../../entities/User";
 import { IMailProvider, IMessage } from "../../providers/IMailProvider";
+import { ITaskTrackerRepository } from "../../repositores/ITaskTrackerRepository";
 import { IUsersRepository } from "../../repositores/IUserRepository";
 import { ICreateUserRequestDTO } from "./CreateUserDTO";
 
@@ -7,6 +8,7 @@ export class CreateUserUseCase {
 
     constructor(
         private userRepository: IUsersRepository,
+        private taskTrackerRepository: ITaskTrackerRepository,
         private mailProvider: IMailProvider
     ) {}
 
@@ -33,5 +35,6 @@ export class CreateUserUseCase {
 
         await this.userRepository.save(user);
         await this.mailProvider.sendMail(message);
+        await this.taskTrackerRepository.save(user.id);
     }
 }

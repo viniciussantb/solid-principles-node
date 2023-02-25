@@ -8,7 +8,6 @@ export class CreateUserUseCase {
 
     constructor(
         private userRepository: IUsersRepository,
-        private taskTrackerRepository: ITaskTrackerRepository,
         private mailProvider: IMailProvider
     ) {}
 
@@ -33,8 +32,9 @@ export class CreateUserUseCase {
             body: "<p>Welcome to our APP!</p>"
         }
 
+        console.log(user.id);
+
         await this.userRepository.save(user);
         await this.mailProvider.sendMail(message);
-        await this.taskTrackerRepository.save(user.id);
     }
 }

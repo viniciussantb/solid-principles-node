@@ -8,6 +8,14 @@ router.post('/users', (resquest, response) => {
     return createUserController.handleCreateUser(resquest, response);
 });
 
+router.get('/task', (request, response) => {
+    return taskTrackerController.handleGetTask(request, response);
+})
+
+router.post('/taskTracker', (request, response) => {
+    return taskTrackerController.handleInsertTaskTracker(request, response);
+})
+
 router.post('/task', (request, response) => {
     return taskTrackerController.handleInsertTask(request, response);
 });

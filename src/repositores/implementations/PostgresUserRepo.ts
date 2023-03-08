@@ -1,8 +1,14 @@
+import { uuid } from "uuidv4";
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../IUserRepository";
 
 export class PostgresUserRepository implements IUsersRepository {
-    private users: User[] = [];
+    private users: User[] = [{
+        id: uuid(),
+        name: "sweetness",
+        email: "sweetness@email.com",
+        password: "sweetness123"
+    }];
 
     async findByEmail(email: string): Promise<User> {
         const user = this.users.find(user => user.email === email);
@@ -10,7 +16,8 @@ export class PostgresUserRepository implements IUsersRepository {
         return user;
     }
 
-    async save(user: User): Promise<void> {
+    async save(user: User): Promise<User> {
         this.users.push(user);
+        return user;
     }
 }

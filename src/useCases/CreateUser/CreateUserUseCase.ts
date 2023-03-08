@@ -1,6 +1,5 @@
 import { User } from "../../entities/User";
 import { IMailProvider, IMessage } from "../../providers/IMailProvider";
-import { ITaskTrackerRepository } from "../../repositores/ITaskTrackerRepository";
 import { IUsersRepository } from "../../repositores/IUserRepository";
 import { ICreateUserRequestDTO } from "./CreateUserDTO";
 
@@ -11,7 +10,7 @@ export class CreateUserUseCase {
         private mailProvider: IMailProvider
     ) {}
 
-    async execute (data: ICreateUserRequestDTO) {
+    async execute (data: ICreateUserRequestDTO): Promise<User> {
         const  userAlreadyExists = await this.userRepository.findByEmail(data.email);
 
         if(userAlreadyExists) {
@@ -36,5 +35,7 @@ export class CreateUserUseCase {
 
         await this.userRepository.save(user);
         await this.mailProvider.sendMail(message);
+
+        return user;
     }
 }

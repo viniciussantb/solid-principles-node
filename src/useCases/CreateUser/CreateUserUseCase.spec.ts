@@ -31,4 +31,18 @@ describe("Create User", () => {
         expect(user).toHaveProperty('id');
         expect(user).toHaveProperty('name', 'José');
     });
+
+    it("should throw a 'User already exists' Error", async () => {
+        const userDto: ICreateUserRequestDTO = {
+            name: "sweetness",
+            email: "sweetness@email.com",
+            password: "sweetness123",
+        }
+
+        try{
+            await createUserUseCase.execute(userDto);
+        } catch (e) {
+            expect(e.message).toMatch('User already exists.');
+        }
+    });
 });

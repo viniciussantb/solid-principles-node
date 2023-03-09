@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { uuid } from "uuidv4";
-import { TaskTracker } from "../../entities/TaskTracker";
 import { CreateTaskTrackerDTO } from "./CreateTaskTrackerDTO";
 import { TaskTrackerDTO } from "./TaskTrackerDTO";
 import { TaskTrackerUseCase } from "./TaskTrackerUseCase";

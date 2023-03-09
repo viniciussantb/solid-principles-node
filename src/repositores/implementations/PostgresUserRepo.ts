@@ -4,7 +4,7 @@ import { IUsersRepository } from "../IUserRepository";
 
 export class PostgresUserRepository implements IUsersRepository {
     private users: User[] = [{
-        id: uuid(),
+        id: "12",
         name: "sweetness",
         email: "sweetness@email.com",
         password: "sweetness123"

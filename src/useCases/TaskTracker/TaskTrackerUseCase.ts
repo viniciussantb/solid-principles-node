@@ -1,11 +1,11 @@
 import { TaskTracker } from "../../entities/TaskTracker";
-import { PostgresTaskTrackerRepository } from "../../repositores/implementations/PostgresTaskTrackerRepo";
+import { ITaskTrackerRepository } from "../../repositores/ITaskTrackerRepository";
 import { CreateTaskTrackerDTO } from "./CreateTaskTrackerDTO";
 import { TaskTrackerDTO } from "./TaskTrackerDTO";
 
 export class TaskTrackerUseCase {
     constructor(
-        private taskTrackerRepository: PostgresTaskTrackerRepository
+        private taskTrackerRepository: ITaskTrackerRepository
     ) {}
 
     async getTask(userId: string): Promise<TaskTracker> {

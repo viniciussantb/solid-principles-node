@@ -2,7 +2,15 @@ import { Task, TaskTracker } from "../../entities/TaskTracker";
 import { ITaskTrackerRepository } from "../ITaskTrackerRepository";
 
 export class PostgresTaskTrackerRepository implements ITaskTrackerRepository {
-    private tasksTracker: TaskTracker[] = [];
+    private tasksTracker: TaskTracker[] = [{
+        id: "12",
+        userId: "12",
+        monday: [],
+        tuesday: [],
+        wednesday: [],
+        thursday: [],
+        friday: []
+    }];
 
     async findByUserId(userId: string): Promise<TaskTracker> {
         const userTaskTracker = this.tasksTracker.find(task => task.userId === userId);

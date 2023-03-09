@@ -1,11 +1,12 @@
 import { TaskTracker } from "../../entities/TaskTracker";
 import { ITaskTrackerRepository } from "../../repositores/ITaskTrackerRepository";
+import { IUsersRepository } from "../../repositores/IUserRepository";
 import { CreateTaskTrackerDTO } from "./CreateTaskTrackerDTO";
 import { TaskTrackerDTO } from "./TaskTrackerDTO";
 
 export class TaskTrackerUseCase {
     constructor(
-        private taskTrackerRepository: ITaskTrackerRepository
+        private taskTrackerRepository: ITaskTrackerRepository,
     ) {}
 
     async getTask(userId: string): Promise<TaskTracker> {
@@ -13,12 +14,20 @@ export class TaskTrackerUseCase {
     }
 
     async insertTaskTracker(userId: string) {
-        await this.taskTrackerRepository.save(userId);
+        const taskId = await this.taskTrackerRepository.save(userId);
+
+        if (taskId === 'user not found...') {
+            throw new Error('User not found.');
+        }
     }
 
     async insertTask(data: CreateTaskTrackerDTO) {
         const { userId, weekday, task } = data;
-        await this.taskTrackerRepository.insertTask(userId, weekday, task);
+        const taskId = await this.taskTrackerRepository.insertTask(userId, weekday, task);
+
+        if (taskId === 'user not found...') {
+            throw new Error('User not found.');
+        }
     }
 
     async deleteTask(data: TaskTrackerDTO) {

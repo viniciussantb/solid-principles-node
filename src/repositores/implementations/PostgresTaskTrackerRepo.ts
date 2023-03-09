@@ -25,34 +25,34 @@ export class PostgresTaskTrackerRepository implements ITaskTrackerRepository {
     }
 
     async insertTask(userId: string, weekday: string, task: Task): Promise<string> {
-        this.tasksTracker.find(taskTracker => {
-            if (taskTracker.userId === userId) {         
+        let taskId: string;
+        this.tasksTracker.forEach(taskTracker => {
+            if (taskTracker.userId === userId) {
                 switch (weekday) {
                     case "monday":
                         taskTracker.monday.push(task);
-                        return task.id;
-        
+                        return;
                     case "tuesday":
                         taskTracker.tuesday.push(task);
-                        return task.id;
-                
+                        return;
                     case "wednesday":
                         taskTracker.wednesday.push(task);
-                        return task.id;
-        
+                        return;
                     case "thursday":
                         taskTracker.thursday.push(task);
-                        return task.id;
-        
+                        return;
                     case "friday":
                         taskTracker.friday.push(task);
-                        return task.id;
+                        return;
                     default:
+                        taskId = task.id;
                         break;
                 }
+            } else {
+                taskId = 'user not found...';
             }
-        })
-        return 'user not found...';
+        });
+        return taskId;
     }
 
     async deleteTask(userId: string, weekday: string, taskId: string): Promise<void> {

@@ -1,6 +1,5 @@
 import { ITaskTrackerRepository } from "../../repositores/ITaskTrackerRepository";
 import { TaskTrackerController } from "./TaskTrackerController";
-import { CreateTaskTrackerDTO } from "./CreateTaskTrackerDTO";
 import { TaskTrackerUseCase } from "./TaskTrackerUseCase";
 import { PostgresTaskTrackerRepository } from "../../repositores/implementations/PostgresTaskTrackerRepo";
 import { Task } from "../../entities/TaskTracker";
@@ -49,5 +48,13 @@ describe("TaskTrackerController tests", () => {
             .send(taskDTO)
             .expect(400);
     });
+
+    it("should return a taskTracker of a user", async () => {
+        await request(app)
+            .get('/task?userId=12')
+            .expect(200);
+    });
+
+    
 });
 
